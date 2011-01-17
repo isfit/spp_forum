@@ -1,0 +1,13 @@
+<%= "Forums" %>
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+  <% for forum in @forums %>
+    <tr>
+      <td><%= forum.name %></td>
+      <td><%= link_to "Show", forum %></td>
+    </tr>
+  <% end %>
+</table>
+

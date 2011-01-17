@@ -1,0 +1,15 @@
+<h1><%= @forum_thread.title %></h1>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Body</th>
+  </tr>
+  <% @forum_thread.forum_posts.each do |f| %>
+    <tr>
+      <td><%= f.title %></td>
+      <td><%= f.body %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "New forum post" , new_forum_thread_forum_post_path(@forum_thread) %>

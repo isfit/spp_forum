@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <!--<title>The Student Peace Prize Forum</title>-->
+    <%= stylesheet_link_tag :all%>
+    <%= javascript_include_tag :defaults %>
+    <title><%= yield(:title).blank? ? 'The Student Peace Prize Forum' : yield(:title) %></title>
+    <%=yield :head%>
+  </head>
+  <body>
+    <div id="wrapper" class="container_16">
+      <div id="quotation" class="grid_8 prefix_1 suffix_3">
+      </div>
+      <div class="clear">
+      </div>
+      <div id="nav" class="grid_12 suffix_4">
+      </div>
+      <div class="clear">
+      </div>
+      <div id="headertext" class="grid_12 suffix_4">
+      </div>
+      <div class="clear">
+      </div>
+   <!--   <div id="subnav" class="grid_12">
+      </div>-->
+      <div id="activesubnav" class="grid_12">
+        <ul id="submenu">
+          <li></li>
+        </ul>
+      </div>
+      <div id="spacersubnav" class="grid_3 suffix_1">
+      </div>
+      <div class="clear">
+      </div>
+      <div id="mainframe" class="grid_12">
+        <div class="content">
+          <span class="otherart">
+            <p class="alert"><%= alert %></p>
+            <p class="notice"><%= notice %></p>
+            <%= yield %>
+          </span>
+        </div>
+        <div id="mainend" class="grid_12 alpha omega">
+          <hr>
+        </div>
+        <div class="clear">
+        </div>
+      </div>
+      <!--<div id="sidebar" class="grid_3">
+      </div>-->
+      <div id="spacerright" class="grid_1">
+      </div>
+      <div class="clear">
+      </div>
+      <div id="footer" class="grid_15 suffix_1">
+        <hr>
+      </div>
+      <div id="footernav" class="grid_8">
+        <h1>Navigation</h1>
+        <hr>
+        <div class="grid_2 alpha">
+          <ul class="footermenu" >
+          </ul>
+        </div>
+        <div class="grid_2">
+          <ul class="footermenu" >
+          </ul>
+        </div>
+        <div class="grid_2">
+          <ul class="footermenu" >
+          </ul>
+        </div>
+        <div class="grid_2 omega">
+          <ul class="footermenu" >
+          </ul>
+        </div>
+      </div>
+      <div id="footerpart" class="grid_4">
+        <h1>Partners</h1>
+        <hr>
+        <%=link_to (image_tag "saih-logo.gif", :alt=>'SAIH'), "http://www.saih.no", :target=>"_blank"%>
+        <div class="grid_2 alpha">
+          <%=link_to (image_tag "logoNSO.jpg", :alt=>'nso'), "http://www.student.no", :target=>"_blank"%><br>
+          <%=link_to (image_tag "isfit.png", :alt=>'isfit', :width=>'100'), "http://www.isfit.org", :target=>"_blank"%>
+        </div>
+        <div class="grid_2 omega">
+        </div>
+      </div>
+      <div id="footerinfo" class="grid_3 omega">
+        <h1>Contact info</h1>
+        <hr>
+        <div class="grid_3 alpha omega">
+          <p>The Student Peace Prize Secretariat<br>
+          Phone:<br>
+          <font color="#63b0b3">(+47) 91749414</font><br>
+          E-mail:<br>
+          <font color="#d56b1d">contact@studentpeaceprize.org</font>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
