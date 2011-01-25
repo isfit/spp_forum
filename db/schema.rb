@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20110106140951) do
 
   create_table "forum_threads", :force => true do |t|
     t.string   "title"
+    t.text     "body"
     t.integer  "forum_id"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -31,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20110106140951) do
 
   create_table "forums", :force => true do |t|
     t.string   "name"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

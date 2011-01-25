@@ -1,0 +1,16 @@
+<%=form_for @forum do |f|%>
+  <p>
+  <strong>Name</strong><br />
+  <%=f.text_field :name %><br />
+  </p>
+
+  <p>
+  <strong>Description</strong><br />
+  <%=f.text_area :description %>
+  </p>
+
+  <p>
+  <%=f.submit "Create Forum"%>
+  </p>
+<%end%>
+

@@ -1,13 +1,21 @@
-<%= "Forums" %>
-<table>
-  <tr>
-    <th>Name</th>
-  </tr>
-  <% for forum in @forums %>
+<% title "Forums" %>
+<table id="forum_table">
+  <thead>
     <tr>
-      <td><%= forum.name %></td>
-      <td><%= link_to "Show", forum %></td>
+      <th class="forum_th"></th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% for forum in @forums
+        threads = forum.forum_threads
+        thread_nr = (threads).length %>
+      <tr>
+        <td class="forum_td"><strong><%= link_to forum.name, forum %></strong> (<%= thread_nr %> threads)<br /><%= forum.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <th class="forum_th"></th>
+  </tfoot>
 </table>
 

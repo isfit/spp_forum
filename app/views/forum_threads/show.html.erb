@@ -1,15 +1,32 @@
-<h1><%= @forum_thread.title %></h1>
-<table>
+<p>
+<% forum = @forum_thread.forum %>
+<%= link_to "All forums", forums_path %> / <%= link_to forum.name , forum_path(forum) %> / <strong><%= @forum_thread.title %></strong><br /><br/>
+<%= link_to "New reply" , new_forum_thread_forum_post_path(@forum_thread) %><br />
+</p>
+
+<table id="forum_post_table">
+  <thead>
   <tr>
-    <th>Title</th>
+    <th>User</th>
     <th>Body</th>
   </tr>
+  </thead>
+  <tbody>
+    <tr class="forum_column">
+      <% thread_user = @forum_thread.user if @forum_thread %>
+      <td class="forum_post_user_td"><%= (thread_user ? thread_user.name : "Can't find user" ) %><br />
+      <%= get_user_posts_text(thread_user) if thread_user %>
+      </td>
+      <td class="forum_post_td"><strong><%= @forum_thread.title %></strong> at <%= @forum_thread.created_at %><br /><%= @forum_thread.body %></td>
+    </tr>
   <% @forum_thread.forum_posts.each do |f| %>
-    <tr>
-      <td><%= f.title %></td>
-      <td><%= f.body %></td>
+    <tr class="forum_column">
+      <td class="forum_post_user_td"><%= (f and f.user ? f.user.name : "Can't find user" ) %><br />
+      <%= get_user_posts_text(f.user) if f %>
+      </td>
+      <td class="forum_post_td"><strong><%= f.title %></strong> at <%= f.created_at %><br /><%= f.body %></td>
     </tr>
   <% end %>
+  </tbody>
 </table>
 
-<%= link_to "New forum post" , new_forum_thread_forum_post_path(@forum_thread) %>

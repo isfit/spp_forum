@@ -1,23 +1,30 @@
-<% title "Forum" %>
+<% title @forum.name %>
 
 <p>
-  <strong>Name:</strong>
-  <%= @forum.name %>
+
+<%= link_to "All forums", forums_path %> / <strong><%= @forum.name %></strong><br />
 </p>
 
-<table>
+<p>
+  <%= link_to "New thread", new_forum_forum_thread_path(@forum) %>
+</p>
+
+<table id="forum_table">
+  <thead>
   <tr>
-    <th>Thread</th>
-    <th>Number of posts</th>
+    <th class="thread_th">Thread</th>
+    <th class="thread_th">Message</th>
+    <th class="thread_th">#Replies</th>
   </tr>
+  </thead>
+  <tbody>
   <% @forum.forum_threads.each do |f| %>
   <tr>
-    <td><%=link_to f.title, forum_forum_thread_path(f)%></td>
-    <td><%=f.forum_posts.size%></td>
+    <td class="forum_td"><%=link_to f.title, forum_forum_thread_path(f)%></td>
+    <td class="forum_td"><%= f.body %></td>
+    <td class="forum_td"><%=f.forum_posts.size%></td>
   <tr>
   <% end %>
+  </tbody>
 </table>
-<p>
-  <%= link_to "New thread", new_forum_forum_thread_path(@forum) %><br>
-  <%= link_to "View All", forums_path %>
-</p>
+

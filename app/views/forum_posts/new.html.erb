@@ -1,2 +1,14 @@
-<h1>ForumPosts#new</h1>
-<p>Find me in app/views/forum_posts/new.html.erb</p>
+<h1>New Reply</h1>
+<p>Add a new reply in the thread "<%= @forum_thread.title %>".</p>
+<p><i>"<%= @forum_thread.body %></i>"</p>
+
+<%=form_for ([@forum_thread,@forum_post]) do |f|%>
+  <%#=f.hidden_field :forum_thread %>
+  <strong>Title</strong><br />
+  <%=f.text_field :title %><br /><br />
+  <strong>Text</strong><br />
+  <%=f.text_area :body %><br /><br />
+  <%=f.submit "Create Post"%>
+<%end%>
+
+

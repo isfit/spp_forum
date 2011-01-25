@@ -1,6 +1,7 @@
 class ForumThreadsController < ApplicationController
   respond_to :html
   load_and_authorize_resource 
+
   def new
     @forum = Forum.find(params[:forum_id])
   end
