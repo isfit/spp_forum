@@ -1,3 +1,7 @@
+<%= render :partial => "forums/navigation", :locals => {:type => :show_user} %>
+
+<%= render 'users/user_login_info' %>
+
 <h3><%= @user.name %></h3>
 
 <%= link_to_if(can?(:update,@user), "Edit", edit_user_path(@user)) %> |
@@ -10,8 +14,8 @@
       <td><%= @user.email %></td>
     </tr>
     <tr>
-      <td class="oce-first">Role:</td>
-      <td><%= @user.roles.first.name %></td>
+      <td class="oce-first">Roles:</td>
+      <td><%= @roles %></td>
     </tr>
     <% if can?(:see_timestamps,User) %>
       <tr>

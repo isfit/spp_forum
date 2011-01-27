@@ -1,0 +1,22 @@
+<p>
+<% if type == :forum %>
+  <%= link_to "All forums", forums_path %> / <strong><%= forum.name %></strong>
+  </p>
+  <p>
+  <%= link_to "New thread", new_forum_forum_thread_path(@forum) %>
+<% elsif type == :thread %>
+  <%= link_to "All forums", forums_path %> / <%= link_to forum.name, forum %> / <strong><%= thread.title %></strong>
+  </p>
+  <p>
+  <%= link_to "New reply" , new_forum_thread_forum_post_path(@forum_thread) %><br />
+  </p>
+<% elsif type == :all_forums %>
+  <strong>All forums</strong>
+  </p>
+  <p>
+  <%= link_to "New Forum", new_forum_path %>
+<% elsif type == :show_user or type == :all_users or type == :edit_user %>
+  <%= link_to "All forums", forums_path %>
+<% end %>
+</p>
+

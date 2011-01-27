@@ -1,2 +1,16 @@
-<h1>ForumThreads#edit</h1>
-<p>Find me in app/views/forum_threads/edit.html.erb</p>
+<h1>Edit Thread</h1>
+<%= form_for(@forum_thread, :action => "update") do |f|%>
+  <p>
+  <strong><%= f.label :title %></strong><br />
+  <%= f.text_field :title %>
+  </p>
+  <p>
+  <strong><%= f.label :body %></strong><br />
+  <%= f.text_area :body %>
+  </p>
+
+  <p>
+  <%= f.submit "Edit Thread" %>
+  </p>
+<% end %>
+

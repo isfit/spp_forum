@@ -1,4 +1,4 @@
-<h1>New forum thread</h1>
+<h1>New Thread</h1>
 <%= form_for([@forum,@forum_thread]) do |f|%>
   <p>
   <strong><%= f.label :title %></strong><br />
@@ -10,6 +10,6 @@
   </p>
 
   <p>
-  <%= f.submit "Create thread" %>
+  <%= f.submit "New Thread" %>
   </p>
 <% end %>

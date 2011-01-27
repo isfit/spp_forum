@@ -7,6 +7,7 @@ class ForumThreadsController < ApplicationController
   end
 
   def edit
+    @forum_thread = ForumThread.find(params[:id])
   end
 
   def show
@@ -21,6 +22,19 @@ class ForumThreadsController < ApplicationController
         format.html {redirect_to forum_path(@forum_thread.forum), :notice => "Thread created" }
       else
         format.html {render :action => :new}
+      end
+    end
+  end
+
+  def update
+    @forum_thread = ForumThread.find(params[:id])
+    status = @forum_thread.update_attributes(params[:forum_thread])
+
+    respond_to do |format|
+      if status 
+        format.html {redirect_to forum_thread_path(@forum_thread), :notice => "Thread updated!" }
+      else
+        format.html {render :action => :edit}
       end
     end
   end

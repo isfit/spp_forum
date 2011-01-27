@@ -21,6 +21,7 @@ class UsersController < ApplicationController
   # GET /users/new.json                                    HTML AND AJAX
   #-------------------------------------------------------------------
   def new
+    @user = User.new
     respond_to do |format|
       format.json { render :json => @user }   
       format.xml  { render :xml => @user }
@@ -33,6 +34,17 @@ class UsersController < ApplicationController
   # GET /users/1.json                                     HTML AND AJAX
   #-------------------------------------------------------------------
   def show
+    @user = User.find(params[:id])
+    @roles = ""
+
+    @user.roles.each do |role|
+      if @roles = ""
+        @roles += role.name
+      else
+        @roles += ", " + role.name
+      end
+    end
+
     respond_to do |format|
       format.json { render :json => @user }
       format.xml  { render :xml => @user }
@@ -81,16 +93,20 @@ class UsersController < ApplicationController
   #-----------------------------------------------------------------
   def create
     @user = User.new(params[:user])
+    role = Role.new
+    role.name = "normal"
+    role.save
+    @user.roles.push(role)
 
     if @user.save
       respond_to do |format|
-        format.json { render :json => @user.to_json, :status => 200 }
+        format.json { render :json => @user.to_json, :status => 200, :text => "User was created!" }
         format.xml  { head :ok }
         format.html { redirect_to :action => :index }
       end
     else
       respond_to do |format|
-        format.json { render :text => "Could not create user", :status => :unprocessable_entity } # placeholder
+        format.json { render :text => "Could not create user.", :status => :unprocessable_entity } # placeholder
         format.xml  { head :ok }
         format.html { render :action => :new, :status => :unprocessable_entity }
       end
@@ -107,7 +123,7 @@ class UsersController < ApplicationController
     if params[:user][:password].blank?
       [:password,:password_confirmation,:current_password].collect {|p| params[:user].delete(p)}  
     end
-
+    
     respond_to do |format|
       if @user.errors[:base].empty? && @user.update_attributes(params[:user])
         flash[:notice] = "Your account has been updated"

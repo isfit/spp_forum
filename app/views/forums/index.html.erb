@@ -1,4 +1,9 @@
 <% title "Forums" %>
+
+<%= render :partial => "forums/navigation", :locals => {:type => :all_forums} %>
+
+<%= render 'users/user_login_info' %>
+
 <table id="forum_table">
   <thead>
     <tr>

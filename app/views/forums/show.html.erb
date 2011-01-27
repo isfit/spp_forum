@@ -1,13 +1,9 @@
 <% title @forum.name %>
 
-<p>
+<%= render :partial => "forums/navigation", :locals => {:type => :forum, :forum => @forum} %>
 
-<%= link_to "All forums", forums_path %> / <strong><%= @forum.name %></strong><br />
-</p>
 
-<p>
-  <%= link_to "New thread", new_forum_forum_thread_path(@forum) %>
-</p>
+<%= render 'users/user_login_info' %>
 
 <table id="forum_table">
   <thead>

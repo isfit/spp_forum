@@ -5,7 +5,7 @@ class Ability
     user ||= User.new
     
     # TODO: Fjernes
-    can :manage, :all
+    #can :manage, :all
 
     if user.role? :admin
       can :manage, :all

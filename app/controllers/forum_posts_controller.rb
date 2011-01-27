@@ -2,10 +2,11 @@ class ForumPostsController < ApplicationController
   def new
     @forum_thread = ForumThread.find(params[:forum_thread_id])
     @forum_post = ForumPost.new
-#    @forum_post.forum_thread = @forum_thread
   end
 
   def edit
+    @forum_post = ForumPost.find(params[:id])
+    @forum_thread = @forum_post.forum_thread
   end
 
   def create
@@ -22,6 +23,18 @@ class ForumPostsController < ApplicationController
       else
         flash[:notice] = "Something went wrong"
         format.html { render :action => "new" }
+      end
+    end
+  end
+
+  def update
+    @forum_post = ForumPost.find(params[:id])
+
+    respond_to do |format|
+      if @forum_post.update_attributes(params[:forum_post])
+        format.html {redirect_to forum_thread_path(@forum_post.forum_thread), :notice => "Post updated!" }
+      else
+        format.html {render :action => :edit}
       end
     end
   end
