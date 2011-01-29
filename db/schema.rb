@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20110106140951) do
 
   create_table "forum_threads", :force => true do |t|
     t.string   "title"
+    t.text     "body"
     t.integer  "forum_id"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -31,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20110106140951) do
 
   create_table "forums", :force => true do |t|
     t.string   "name"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -62,6 +64,11 @@ ActiveRecord::Schema.define(:version => 20110106140951) do
     t.datetime "updated_at"
     t.string   "firstname"
     t.string   "surname"
+    t.text     "description"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

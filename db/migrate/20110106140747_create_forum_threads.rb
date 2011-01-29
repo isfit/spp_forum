@@ -2,6 +2,7 @@ class CreateForumThreads < ActiveRecord::Migration
   def self.up
     create_table :forum_threads do |t|
       t.string :title
+      t.text :body
       t.belongs_to :forum
       t.belongs_to :user
 

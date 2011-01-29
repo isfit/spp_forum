@@ -1,15 +1,56 @@
-<h1><%= @forum_thread.title %></h1>
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Body</th>
-  </tr>
+<% forum = @forum_thread.forum %>
+<%= subnav_links raw(render :partial => "forums/navigation", :locals => {:type => :thread, :forum => forum, :thread => @forum_thread}) %>
+<% nav_links raw(render "users/user_login_info") %>
+
+<% if can?(:create, ForumPost) %>
+  <p>
+  <%= link_to "New reply" , new_forum_thread_forum_post_path(@forum_thread) %>
+  </p>
+<% end %>
+
+<table id="forum_post_table">
+  <tbody>
+    <tr class="forum_column">
+      <% thread_user = @forum_thread.user if @forum_thread %>
+      <td class="forum_post_user_td">
+        <%= raw (get_user_post_text(thread_user)) if thread_user %>
+      </td>
+      <td class="forum_post_td"><strong><%= @forum_thread.title %></strong> at <%= @forum_thread.created_at %><br /><%= @forum_thread.body %>
+      <% thread_was_updated = (@forum_thread.updated_at != @forum_thread.created_at) %>
+      <% if can?(:update, @forum_thread) or thread_was_updated %>
+          <br /><br />
+          <%= link_to("Edit", edit_forum_thread_path(@forum_thread)) if can?(:update, @forum_thread) %>
+          <% if thread_was_updated %>
+            <i>(last edit at <%= @forum_thread.updated_at %>)</i>
+          <% end %>
+      <% end %>
+      </td>
+    </tr>
   <% @forum_thread.forum_posts.each do |f| %>
-    <tr>
-      <td><%= f.title %></td>
-      <td><%= f.body %></td>
+    <tr class="forum_column">
+      <td class="forum_post_user_td">
+      <%= raw (get_user_post_text(f.user)) if f %>
+      </td>
+      <td class="forum_post_td"><strong><%= f.title %></strong> at <%= f.created_at %><br /><%= f.body %>
+        <% post_was_updated = (f.updated_at != f.created_at) %>
+        <% if can?(:update, f) or post_was_updated %>
+          <br /><br />
+          <%= link_to("Edit", edit_forum_thread_path(f)) if can?(:update, f) %>
+          <% if post_was_updated %>
+            <i>(last edit at <%= f.updated_at %>)</i>
+          <% end %>
+        <% end %>
+      </td>
     </tr>
   <% end %>
+  </tbody>
 </table>
 
-<%= link_to "New forum post" , new_forum_thread_forum_post_path(@forum_thread) %>
+<% if can?(:create, ForumPost) %>
+  <p>
+  <%= link_to "New reply" , new_forum_thread_forum_post_path(@forum_thread) %>
+  </p>
+<% end %>
+
+
+

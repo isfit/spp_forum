@@ -1,13 +1,34 @@
-<%= "Forums" %>
-<table>
-  <tr>
-    <th>Name</th>
-  </tr>
-  <% for forum in @forums %>
+<%= nav_links(render 'users/user_login_info') %>
+<%= subnav_links(render :partial => "forums/navigation", :locals => {:type => :all_forums}) %>
+
+<% if can?(:create, Forum) %>
+  <p>
+  <%= link_to "New Forum", new_forum_path %>
+  </p>
+<% end %>
+
+<table id="forum_table">
+  <thead>
     <tr>
-      <td><%= forum.name %></td>
-      <td><%= link_to "Show", forum %></td>
+      <th class="forum_th"></th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% if !@authorized %>
+      <tr>
+        <td class="forum_td"><strong>Welcome to the Forums!</strong><br />You have to log in above to be able to read posts and participate in the discussion.</td>
+      </tr>
+    <% end %>
+    <% for forum in @forums
+        threads = forum.forum_threads
+        thread_nr = (threads).length %>
+      <tr>
+        <td class="forum_td"><strong><%= link_to forum.name, forum %></strong> (<%= thread_nr %> threads)<br /><%= forum.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <th class="forum_th"></th>
+  </tfoot>
 </table>
 

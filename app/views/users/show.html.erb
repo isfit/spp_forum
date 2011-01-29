@@ -1,17 +1,36 @@
+<%= nav_links(render 'users/user_login_info') %>
+<%= subnav_links(render :partial => "forums/navigation", :locals => {:type => :show_user}) %>
+
+<% if can?(:update, @user) %>
+  <p>
+  <%= link_to("Edit", edit_user_path(@user)) %>
+  <% if can?(:destroy, @user) %>
+    -
+    <%= link_to("Delete", user_path(@user), :confirm => "Are you sure?", :method => :delete) %>
+  <% end %>
+  </p>
+<% end %>
+
 <h3><%= @user.name %></h3>
 
-<%= link_to_if(can?(:update,@user), "Edit", edit_user_path(@user)) %> |
-<%= link_to_if(can?(:delete, @user), "Delete", user_path(@user), :confirm => "Are you sure?", :method => :delete) {} %>
 
 <table class="one-column-emphasis">
   <tbody>
+    <tr>
+      <td class="oce-first">Picture:</td>
+      <td><%= image_tag @user.picture.url(:medium) %></td>
+    </tr>
     <tr>
       <td class="oce-first">Email:</td>
       <td><%= @user.email %></td>
     </tr>
     <tr>
-      <td class="oce-first">Role:</td>
-      <td><%= @user.roles.first.name %></td>
+      <td class="oce-first">Roles:</td>
+      <td><%= @roles %></td>
+    </tr>
+    <tr>
+      <td class="oce-first">Description:</td>
+      <td><%= @user.description %></td>
     </tr>
     <% if can?(:see_timestamps,User) %>
       <tr>

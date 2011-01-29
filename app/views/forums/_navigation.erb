@@ -1,0 +1,38 @@
+<% if type == :forum %>
+  <li>
+  <%= link_to "All forums", forums_path %> / <strong><%= forum.name %></strong>
+  </li>
+<% elsif type == :thread %>
+  <li>
+  <%= link_to "All forums", forums_path %> / <%= link_to forum.name, forum %> / <strong><%= thread.title %></strong>
+  </li>
+<% elsif type == :edit_thread %>
+  <li>
+  <%= link_to "All forums", forums_path %> / <%= link_to forum.name, forum %> / <%= link_to thread.title, thread %> / <strong>Edit thread</strong>
+  </li>
+<% elsif type == :new_thread %>
+  <li>
+  <%= link_to "All forums", forums_path %> / <%= link_to forum.name, forum %> / <strong>New thread</strong>
+  </li>
+<% elsif type == :edit_post %>
+  <li>
+  <%= link_to "All forums", forums_path %> / <%= link_to post.forum_thread.forum.name, post.forum_thread.forum %> / <%= link_to post.forum_thread.title, post.forum_thread %> / <strong>Edit "<%= post.title %>"</strong>
+  </li>
+<% elsif type == :new_post %>
+  <li>
+  <%= link_to "All forums", forums_path %> / <%= link_to thread.forum.name, thread.forum %> / <%= link_to thread.title, thread %> / <strong>New reply</strong>
+  </li>
+<% elsif type == :all_forums %>
+  <li>
+  <strong>All forums</strong>
+  </li>
+<% elsif type == :new_forum %>
+  <li>
+  <%= link_to "All forums", forums_path %> / <strong>New forum</strong>
+  </li>
+<% elsif type == :show_user or type == :all_users or type == :edit_user or type == :new_user %>
+  <li>
+  <%= link_to "All forums", forums_path %>
+  </li>
+<% end %>
+

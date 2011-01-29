@@ -1,2 +1,22 @@
-<h1>ForumPosts#new</h1>
-<p>Find me in app/views/forum_posts/new.html.erb</p>
+<% nav_links raw(render "users/user_login_info") %>
+
+<%= subnav_links raw(render :partial => "forums/navigation", :locals => {:type => :new_post, :thread => @forum_thread}) %>
+
+<h1>New Reply</h1>
+<p>New reply for the following thread:<br />
+<strong>Title:</strong> <%= @forum_thread.title %><br />
+<strong>Body:</strong> <%= @forum_thread.body %>
+</p>
+
+<p>
+<%=form_for ([@forum_thread,@forum_post]) do |f|%>
+  <strong>Title</strong><br />
+  <%=f.text_field :title %><br /><br />
+  <strong>Text</strong><br />
+  <%=f.text_area :body %><br /><br />
+  <%=f.submit "Create reply"%>
+<%end%>
+</p>
+
+
+
