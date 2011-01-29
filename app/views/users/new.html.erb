@@ -1,4 +1,5 @@
-<%= render 'users/user_login_info' %>
+<%= nav_links(render 'users/user_login_info') %>
+<%= subnav_links(render :partial => "forums/navigation", :locals => {:type => :new_user}) %>
 
 <h2>Register User</h2>
 

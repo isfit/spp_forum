@@ -1,3 +1,7 @@
+<p>Profile picture</p>
+<p><%= image_tag @user.picture.url(:medium) %></p>
+<p><%= f.file_field :picture %></p>
+
 <p><%= f.label :firstname %></p>
 <p><%= f.text_field :firstname %></p>
 
@@ -7,9 +11,10 @@
 <p><%= f.label :email %></p>
 <p><%= f.text_field :email %></p>
 
+<p>Description of yourself</p>
+<p><%= f.text_area :description %></p>
+
 <% if can? :read, Role %>
-  <p><%= f.label :role %></p>
-  <ul class="no-pad no-bullets">
-    <%#= habtm_checkboxes(@user, :role_ids, @accessible_roles, :name) %>
-  </ul>
+  <p><%= f.label :roles %></p>
+  <p><%= @roles %></p>
 <% end %>

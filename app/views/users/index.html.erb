@@ -1,6 +1,6 @@
-<%= render :partial => "forums/navigation", :locals => {:type => :edit_user} %>
+<%= nav_links(render 'users/user_login_info') %>
+<%= subnav_links(render :partial => "forums/navigation", :locals => {:type => :edit_user}) %>
 
-<%= render 'users/user_login_info' %>
 
 <table id="forum_table">
   <thead>
@@ -8,7 +8,6 @@
     <th class="thread_th">Name</th>
     <th class="thread_th">E-mail</th>
     <th class="thread_th">Roles</th>
-    <th class="thread_th">Actions</th>
   </tr>
 </thead>
 <tbody>
@@ -17,11 +16,7 @@
     <td class="thread_td"><%= link_to_if(can?(:read, User), "#{u.name}", user_path(u.id)) {} %></td>
     <td class="thread_td"><%= "#{u.email}" %></td>
     <td class="thread_td"><%= "#{u.roles.collect{|r| r.name}}" %></td>
-    <td class="thread_td">
-      <%= link_to_if(can?(:edit, User), image_tag("edit.png"), edit_user_path(u.id)) {} %>
-      <%= link_to_if(can?(:delete, u), image_tag("trash.png"), u, :confirm => "Are you sure?", :method => :delete) {} %>
-    </td>
-  </tr>
+   </tr>
 <% end %>
 </tbody>
 </table>

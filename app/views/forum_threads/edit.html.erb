@@ -1,3 +1,8 @@
+<% nav_links raw(render "users/user_login_info") %>
+
+<% forum = @forum_thread.forum %>
+<%= subnav_links raw(render :partial => "forums/navigation", :locals => {:type => :edit_thread, :forum => forum, :thread => @forum_thread}) %>
+
 <h1>Edit Thread</h1>
 <%= form_for(@forum_thread, :action => "update") do |f|%>
   <p>

@@ -6,6 +6,7 @@
     <%= stylesheet_link_tag :all%>
     <%= javascript_include_tag :defaults %>
     <title><%= yield(:title).blank? ? 'The Student Peace Prize Forum' : yield(:title) %></title>
+
     <%=yield :head%>
   </head>
   <body>
@@ -15,6 +16,9 @@
       <div class="clear">
       </div>
       <div id="nav" class="grid_12 suffix_4">
+        <ul id="menu">
+          <%= yield :nav_links %>
+        </ul>
       </div>
       <div class="clear">
       </div>
@@ -26,7 +30,7 @@
       </div>-->
       <div id="activesubnav" class="grid_12">
         <ul id="submenu">
-          <li></li>
+          <%= yield :subnav_links %>
         </ul>
       </div>
       <div id="spacersubnav" class="grid_3 suffix_1">

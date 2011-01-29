@@ -1,9 +1,11 @@
-<% title @forum.name %>
+<%= nav_links(render 'users/user_login_info') %>
+<%= subnav_links(render :partial => "forums/navigation", :locals => {:type => :forum, :forum => @forum}) %>
 
-<%= render :partial => "forums/navigation", :locals => {:type => :forum, :forum => @forum} %>
-
-
-<%= render 'users/user_login_info' %>
+<% if can?(:create, ForumThread) %>
+  <p>
+  <%= link_to "New thread", new_forum_forum_thread_path(@forum) %>
+  </p>
+<% end %>
 
 <table id="forum_table">
   <thead>
@@ -16,7 +18,7 @@
   <tbody>
   <% @forum.forum_threads.each do |f| %>
   <tr>
-    <td class="forum_td"><%=link_to f.title, forum_forum_thread_path(f)%></td>
+    <td class="forum_td"><%=link_to f.title, forum_thread_path(f)%></td>
     <td class="forum_td"><%= f.body %></td>
     <td class="forum_td"><%=f.forum_posts.size%></td>
   <tr>

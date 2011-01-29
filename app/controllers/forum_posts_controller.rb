@@ -1,12 +1,19 @@
 class ForumPostsController < ApplicationController
   def new
-    @forum_thread = ForumThread.find(params[:forum_thread_id])
-    @forum_post = ForumPost.new
+    if can?(:create, ForumPost)
+      @forum_thread = ForumThread.find(params[:forum_thread_id])
+      @forum_post = ForumPost.new
+      @forum_post.title = "Re: " + @forum_thread.title
+    end
   end
 
   def edit
     @forum_post = ForumPost.find(params[:id])
-    @forum_thread = @forum_post.forum_thread
+    if can?(:update, @forum_post)
+      @forum_thread = @forum_post.forum_thread
+    else
+      @forum_post = nil
+    end
   end
 
   def create
@@ -17,7 +24,7 @@ class ForumPostsController < ApplicationController
     @forum_thread.user = current_user
 
     respond_to do |format|
-      if @forum_post.save
+      if can?(:create, ForumPost) and @forum_post.save
         format.html { redirect_to(forum_thread_path(@forum_thread), :notice=>"Forum post was saved successfully") }
         format.js
       else
@@ -29,9 +36,8 @@ class ForumPostsController < ApplicationController
 
   def update
     @forum_post = ForumPost.find(params[:id])
-
     respond_to do |format|
-      if @forum_post.update_attributes(params[:forum_post])
+      if can?(:update, @forum_post) and @forum_post.update_attributes(params[:forum_post])
         format.html {redirect_to forum_thread_path(@forum_post.forum_thread), :notice => "Post updated!" }
       else
         format.html {render :action => :edit}

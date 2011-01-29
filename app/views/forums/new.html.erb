@@ -1,3 +1,6 @@
+<%= nav_links(render 'users/user_login_info') %>
+<%= subnav_links(render :partial => "forums/navigation", :locals => {:type => :new_forum}) %>
+
 <%=form_for @forum do |f|%>
   <p>
   <strong>Name</strong><br />

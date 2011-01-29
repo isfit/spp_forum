@@ -1,3 +1,7 @@
+<% nav_links raw(render "users/user_login_info") %>
+
+<%= subnav_links raw(render :partial => "forums/navigation", :locals => {:type => :edit_post, :post => @forum_post}) %>
+
 <h1>Edit Post</h1>
 <p>Edit reply for the following thread:<br />
 <strong>Title:</strong> <%= @forum_thread.title %><br />

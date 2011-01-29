@@ -1,4 +1,8 @@
-<h1>New Post</h1>
+<% nav_links raw(render "users/user_login_info") %>
+
+<%= subnav_links raw(render :partial => "forums/navigation", :locals => {:type => :new_post, :thread => @forum_thread}) %>
+
+<h1>New Reply</h1>
 <p>New reply for the following thread:<br />
 <strong>Title:</strong> <%= @forum_thread.title %><br />
 <strong>Body:</strong> <%= @forum_thread.body %>
@@ -10,7 +14,7 @@
   <%=f.text_field :title %><br /><br />
   <strong>Text</strong><br />
   <%=f.text_area :body %><br /><br />
-  <%=f.submit "Create Post"%>
+  <%=f.submit "Create reply"%>
 <%end%>
 </p>
 

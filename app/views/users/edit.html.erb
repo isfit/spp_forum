@@ -1,11 +1,11 @@
-<%= render :partial => "forums/navigation", :locals => {:type => :edit_user} %>
+<%= nav_links(render 'users/user_login_info') %>
+<%= subnav_links(render :partial => "forums/navigation", :locals => {:type => :edit_user}) %>
 
-<%= render 'users/user_login_info' %>
 
 <h3><%= @user == @current_user ? "Your Account Settings" : "Edit User" %></h3>
 
 
-<%= form_for(@user, :html => { :method => :put }) do |f| %>
+<%= form_for(@user, :html => { :multipart => :true }) do |f| %>
   <% if @user.errors.any? %>  
     <div id="errorExplanation">  
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>  

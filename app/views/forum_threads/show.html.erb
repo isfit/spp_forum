@@ -1,41 +1,56 @@
 <% forum = @forum_thread.forum %>
-<%= render :partial => "forums/navigation", :locals => {:type => :thread, :forum => forum, :thread => @forum_thread} %>
+<%= subnav_links raw(render :partial => "forums/navigation", :locals => {:type => :thread, :forum => forum, :thread => @forum_thread}) %>
+<% nav_links raw(render "users/user_login_info") %>
 
-<%= render 'users/user_login_info' %>
+<% if can?(:create, ForumPost) %>
+  <p>
+  <%= link_to "New reply" , new_forum_thread_forum_post_path(@forum_thread) %>
+  </p>
+<% end %>
 
 <table id="forum_post_table">
-  <thead>
-  <tr>
-    <th>User</th>
-    <th>Body</th>
-  </tr>
-  </thead>
   <tbody>
     <tr class="forum_column">
       <% thread_user = @forum_thread.user if @forum_thread %>
-      <td class="forum_post_user_td"><%= (thread_user ? thread_user.name : "Can't find user" ) %><br />
-      <%= get_user_post_text(thread_user) if thread_user %>
+      <td class="forum_post_user_td">
+        <%= raw (get_user_post_text(thread_user)) if thread_user %>
       </td>
-      <td class="forum_post_td"><strong><%= @forum_thread.title %></strong> at <%= @forum_thread.created_at %><br /><%= @forum_thread.body %><br /><br />
-        <%= link_to "Edit", edit_forum_thread_path(@forum_thread) %>
-        <% if @forum_thread.updated_at != @forum_thread.created_at %>
-          <i>(last edit at <%= @forum_thread.updated_at %>)</i>
-        <% end %>
+      <td class="forum_post_td"><strong><%= @forum_thread.title %></strong> at <%= @forum_thread.created_at %><br /><%= @forum_thread.body %>
+      <% thread_was_updated = (@forum_thread.updated_at != @forum_thread.created_at) %>
+      <% if can?(:update, @forum_thread) or thread_was_updated %>
+          <br /><br />
+          <%= link_to("Edit", edit_forum_thread_path(@forum_thread)) if can?(:update, @forum_thread) %>
+          <% if thread_was_updated %>
+            <i>(last edit at <%= @forum_thread.updated_at %>)</i>
+          <% end %>
+      <% end %>
       </td>
     </tr>
   <% @forum_thread.forum_posts.each do |f| %>
     <tr class="forum_column">
-      <td class="forum_post_user_td"><%= (f and f.user ? f.user.name : "Can't find user" ) %><br />
-      <%= get_user_post_text(f.user) if f %>
+      <td class="forum_post_user_td">
+      <%= raw (get_user_post_text(f.user)) if f %>
       </td>
-      <td class="forum_post_td"><strong><%= f.title %></strong> at <%= f.created_at %><br /><%= f.body %><br /><br />
-        <%= link_to "Edit", edit_forum_post_path(f) %>
-        <% if f.updated_at != f.created_at %>
-          <i>(last edit at <%= f.updated_at %>)</i>
+      <td class="forum_post_td"><strong><%= f.title %></strong> at <%= f.created_at %><br /><%= f.body %>
+        <% post_was_updated = (f.updated_at != f.created_at) %>
+        <% if can?(:update, f) or post_was_updated %>
+          <br /><br />
+          <%= link_to("Edit", edit_forum_thread_path(f)) if can?(:update, f) %>
+          <% if post_was_updated %>
+            <i>(last edit at <%= f.updated_at %>)</i>
+          <% end %>
         <% end %>
       </td>
     </tr>
   <% end %>
   </tbody>
 </table>
+
+<% if can?(:create, ForumPost) %>
+  <p>
+  <%= link_to "New reply" , new_forum_thread_forum_post_path(@forum_thread) %>
+  </p>
+<% end %>
+
+
 

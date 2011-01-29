@@ -3,22 +3,26 @@ class ForumThreadsController < ApplicationController
   load_and_authorize_resource 
 
   def new
-    @forum = Forum.find(params[:forum_id])
+    @forum = Forum.find(params[:forum_id]) if can?(:create, ForumThread)
   end
 
   def edit
     @forum_thread = ForumThread.find(params[:id])
+    if !(can?(:update, @forum_thread))
+      @forum_thread = nil
+    end
   end
 
   def show
-    @forum_thread = ForumThread.find(params[:id])
+    @forum_thread = ForumThread.find(params[:id]) if can?(:read, ForumThread)
   end
 
   def create
     #@forum_thread = ForumThread.new(params[:forum_thread])
     @forum_thread.forum_id = params[:forum_id]
+    @forum_thread.user = current_user
     respond_to do |format|
-      if @forum_thread.save
+      if can?(:create, ForumThread) and @forum_thread.save
         format.html {redirect_to forum_path(@forum_thread.forum), :notice => "Thread created" }
       else
         format.html {render :action => :new}
@@ -28,10 +32,9 @@ class ForumThreadsController < ApplicationController
 
   def update
     @forum_thread = ForumThread.find(params[:id])
-    status = @forum_thread.update_attributes(params[:forum_thread])
 
     respond_to do |format|
-      if status 
+      if can?(:update, @forum_thread) and @forum_thread.update_attributes(params[:forum_thread]) 
         format.html {redirect_to forum_thread_path(@forum_thread), :notice => "Thread updated!" }
       else
         format.html {render :action => :edit}

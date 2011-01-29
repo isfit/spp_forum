@@ -36,3 +36,6 @@ end
 #   gem 'webrat'
 # end
 gem "mocha", :group => :test
+
+gem "paperclip"
+

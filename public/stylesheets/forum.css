@@ -30,6 +30,7 @@ td.forum_post_td {
   border-top:1px solid #e5eff8;
   padding:.3em 1em;
   text-align:left;
+  vertical-align:top;
   font:1.2em "Century Gothic","Trebuchet MS",Arial,sans-serif;
 }
 
@@ -43,6 +44,7 @@ td.forum_post_user_td {
   background:#f7fbee;
   padding:.3em 1em;
   text-align:left;
+  vertical-align:top;
   font:1.2em "Century Gothic","Trebuchet MS",Arial,sans-serif;
 }
 
