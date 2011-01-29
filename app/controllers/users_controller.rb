@@ -123,6 +123,7 @@ class UsersController < ApplicationController
 
     if can?(:create, User) and @user.save
       respond_to do |format|
+        ForumMailer.welcome_email(@user).deliver
         format.json { render :json => @user.to_json, :status => 200, :text => "User was created!" }
         format.xml  { head :ok }
         format.html { redirect_to :action => :index }

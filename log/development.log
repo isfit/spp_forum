@@ -38182,3 +38182,135 @@ ActionController::RoutingError (No route matches "/images/layout/front_bottom_ar
   
 
 Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/" for 192.168.0.104 at Sat Jan 29 21:07:45 +0100 2011
+  Processing by ForumsController#index as HTML
+  [1m[36mSQL (16.4ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mRole Load (0.4ms)[0m  SELECT "roles"."id" FROM "roles" INNER JOIN "roles_users" ON "roles".id = "roles_users".role_id WHERE ("roles_users".user_id = NULL ) AND ("roles"."name" = 'admin') LIMIT 1
+  [1m[36mRole Load (0.3ms)[0m  [1mSELECT "roles"."id" FROM "roles" INNER JOIN "roles_users" ON "roles".id = "roles_users".role_id WHERE ("roles_users".user_id = NULL ) AND ("roles"."name" = 'normal') LIMIT 1[0m
+Rendered users/_user_login_info.erb (6.0ms)
+Rendered forums/_navigation.erb (4.6ms)
+Rendered forums/index.html.erb within layouts/application (52.3ms)
+Completed 200 OK in 324ms (Views: 131.3ms | ActiveRecord: 17.2ms)
+
+
+Started GET "/users/sign_in" for 192.168.0.104 at Sat Jan 29 21:07:55 +0100 2011
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (3.2ms)
+Rendered devise/sessions/new.html.erb within layouts/application (25.0ms)
+Completed 200 OK in 190ms (Views: 63.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 192.168.0.104 at Sat Jan 29 21:08:05 +0100 2011
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"commit"=>"Sign in", "authenticity_token"=>"HXASTb1ILlWJDG7j/lxU/uAvhdDLK/G7rvKSaQKPfCo=", "utf8"=>"✓", "user"=>{"remember_me"=>"0", "password"=>"[FILTERED]", "email"=>"kalle@kalle.com"}}
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" WHERE ("users"."email" = 'kalle@kalle.com') LIMIT 1
+  [1m[36mAREL (0.9ms)[0m  [1mUPDATE "users" SET "sign_in_count" = 4, "last_sign_in_at" = '2011-01-29 01:51:08.861684', "updated_at" = '2011-01-29 20:08:05.783510', "current_sign_in_at" = '2011-01-29 20:08:05.782671', "current_sign_in_ip" = '192.168.0.104' WHERE ("users"."id" = 2)[0m
+[paperclip] Saving attachments.
+Redirected to http://192.168.0.130:3000/
+Completed 302 Found in 387ms
+
+
+Started GET "/" for 192.168.0.104 at Sat Jan 29 21:08:05 +0100 2011
+  Processing by ForumsController#index as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" WHERE ("users"."id" = 2) LIMIT 1
+  [1m[36mRole Load (0.3ms)[0m  [1mSELECT "roles"."id" FROM "roles" INNER JOIN "roles_users" ON "roles".id = "roles_users".role_id WHERE ("roles_users".user_id = 2 ) AND ("roles"."name" = 'admin') LIMIT 1[0m
+  [1m[35mForum Load (0.3ms)[0m  SELECT "forums".* FROM "forums"
+Rendered users/_user_login_info.erb (3.4ms)
+Rendered forums/_navigation.erb (1.9ms)
+  [1m[36mForumThread Load (0.6ms)[0m  [1mSELECT "forum_threads".* FROM "forum_threads" WHERE ("forum_threads".forum_id = 1)[0m
+  [1m[35mForumThread Load (0.3ms)[0m  SELECT "forum_threads".* FROM "forum_threads" WHERE ("forum_threads".forum_id = 2)
+Rendered forums/index.html.erb within layouts/application (69.8ms)
+Completed 200 OK in 230ms (Views: 76.5ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/users/new" for 192.168.0.104 at Sat Jan 29 21:08:12 +0100 2011
+  Processing by UsersController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+  [1m[35mRole Load (0.3ms)[0m  SELECT "roles"."id" FROM "roles" INNER JOIN "roles_users" ON "roles".id = "roles_users".role_id WHERE ("roles_users".user_id = 2 ) AND ("roles"."name" = 'admin') LIMIT 1
+Rendered users/_user_login_info.erb (7.7ms)
+Rendered forums/_navigation.erb (5.1ms)
+Rendered users/_user_fields.html.erb (13.4ms)
+Rendered users/new.html.erb within layouts/application (70.3ms)
+Completed 200 OK in 256ms (Views: 100.8ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/pictures/medium/missing.png" for 192.168.0.104 at Sat Jan 29 21:08:12 +0100 2011
+
+ActionController::RoutingError (No route matches "/pictures/medium/missing.png"):
+  
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (3.0ms)
+
+
+Started GET "/pictures/medium/missing.png" for 192.168.0.104 at Sat Jan 29 21:08:12 +0100 2011
+
+ActionController::RoutingError (No route matches "/pictures/medium/missing.png"):
+  
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started POST "/users" for 192.168.0.104 at Sat Jan 29 21:08:42 +0100 2011
+  Processing by UsersController#create as HTML
+  Parameters: {"commit"=>"Register", "authenticity_token"=>"HXASTb1ILlWJDG7j/lxU/uAvhdDLK/G7rvKSaQKPfCo=", "utf8"=>"✓", "user"=>{"password_confirmation"=>"[FILTERED]", "firstname"=>"Sindre", "description"=>"ssdsd", "password"=>"[FILTERED]", "surname"=>"Hansen", "email"=>"sindrehansen86@gmail.com", "picture"=>""}}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+  [1m[35mRole Load (0.3ms)[0m  SELECT "roles"."id" FROM "roles" INNER JOIN "roles_users" ON "roles".id = "roles_users".role_id WHERE ("roles_users".user_id = 2 ) AND ("roles"."name" = 'admin') LIMIT 1
+  [1m[36mAREL (22.2ms)[0m  [1mINSERT INTO "roles" ("updated_at", "name", "created_at") VALUES ('2011-01-29 20:08:42.988268', 'normal', '2011-01-29 20:08:42.988268')[0m
+  [1m[35mUser Load (113.1ms)[0m  SELECT "users"."id" FROM "users" WHERE (LOWER("users"."email") = LOWER('sindrehansen86@gmail.com')) LIMIT 1
+  [1m[36mAREL (0.8ms)[0m  [1mINSERT INTO "users" ("password_salt", "created_at", "picture_file_name", "email", "remember_created_at", "description", "reset_password_token", "last_sign_in_at", "current_sign_in_at", "surname", "current_sign_in_ip", "firstname", "remember_token", "picture_file_size", "picture_updated_at", "encrypted_password", "sign_in_count", "last_sign_in_ip", "updated_at", "picture_content_type") VALUES ('$2a$10$r0zJUPkM3mWvd8RDQ6/NNu', '2011-01-29 20:08:43.360151', NULL, 'sindrehansen86@gmail.com', NULL, 'ssdsd', NULL, NULL, NULL, 'Hansen', NULL, 'Sindre', NULL, NULL, NULL, '$2a$10$r0zJUPkM3mWvd8RDQ6/NNuHbJP/Q/Gj5fN6/O77PHozZtDQAZeKX6', 0, NULL, '2011-01-29 20:08:43.360151', NULL)[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "roles_users" ("role_id", "user_id") VALUES (5, 4)
+[paperclip] Saving attachments.
+Rendered forum_mailer/welcome_email.html.erb (1.3ms)
+
+Sent mail to sindrehansen86@gmail.com (414ms)
+Date: Sat, 29 Jan 2011 21:08:45 +0100
+From: no-reply@studentpeaceprize.org
+To: sindrehansen86@gmail.com
+Message-ID: <4d4473cd223d5_2978249222c07075d@sindrelaptop.mail>
+Subject: Welcome to the Forums at Studentpeaceprize.org!
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Welcome to the Forums at Studentpeaceprize.org, Sindre Hansen!</h1>
+    <p>
+    We've created a user for you and hope that you will make use of the forum.<br/>
+    </p>
+    <p>
+    To login to the site, just follow this link: http://www.studentpeaceprize.org/forums.<br />
+    Log in with your e-mail address.
+    </p>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>
+
+
+Redirected to http://192.168.0.130:3000/users
+Completed 302 Found in 2744ms
+
+
+Started GET "/users" for 192.168.0.104 at Sat Jan 29 21:08:45 +0100 2011
+  Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+  [1m[35mRole Load (0.3ms)[0m  SELECT "roles"."id" FROM "roles" INNER JOIN "roles_users" ON "roles".id = "roles_users".role_id WHERE ("roles_users".user_id = 2 ) AND ("roles"."name" = 'admin') LIMIT 1
+Rendered users/_user_login_info.erb (5.2ms)
+Rendered forums/_navigation.erb (2.4ms)
+  [1m[36mUser Load (3.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35mRole Load (0.3ms)[0m  SELECT * FROM "roles" INNER JOIN "roles_users" ON "roles".id = "roles_users".role_id WHERE ("roles_users".user_id = 1 )
+  [1m[36mRole Load (0.4ms)[0m  [1mSELECT * FROM "roles" INNER JOIN "roles_users" ON "roles".id = "roles_users".role_id WHERE ("roles_users".user_id = 2 )[0m
+  [1m[35mRole Load (0.3ms)[0m  SELECT * FROM "roles" INNER JOIN "roles_users" ON "roles".id = "roles_users".role_id WHERE ("roles_users".user_id = 3 )
+  [1m[36mRole Load (0.3ms)[0m  [1mSELECT * FROM "roles" INNER JOIN "roles_users" ON "roles".id = "roles_users".role_id WHERE ("roles_users".user_id = 4 )[0m
+Rendered users/index.html.erb within layouts/application (39.1ms)
+Completed 200 OK in 185ms (Views: 124.5ms | ActiveRecord: 142.3ms)
