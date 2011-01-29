@@ -1,7 +1,6 @@
 SppForum::Application.routes.draw do
 
   # replace devise_for :users with:
-  devise_for :users,  :controllers => { :registrations => "users/registrations" }
   resources :users
   resources :forums do 
     resources :forum_threads
