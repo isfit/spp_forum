@@ -1,8 +1,0 @@
-1. Fiks rettigheter for brukere:
-	- Normale brukere kan endre sitt eget + legge til tråder og poster.
-	- Alle andre, unntatt admin, kan ikke se eller endre noe.
-2. Sørg for at brukere kan endre sin egen info + passord.
-3. Sjekk at alt fungerer greit.
-4. Legg til bilde + description for hver bruker.
-
-
