@@ -9,8 +9,10 @@
     We've created a user for you and hope that you will make use of the forum.<br/>
     </p>
     <p>
-    To login to the site, just follow this link: <%= @url %>.<br />
-    Log in with your e-mail address.
+    To login to the site, just follow this link: <%= link_to @url, @url %><br />
+    Log in with this information:<br />
+    E-mail: <%= @user.email %><br />
+    Password: <%= @password %> (this password must be changed as soon as you login)
     </p>
     <p>Thanks for joining and have a great day!</p>
   </body>

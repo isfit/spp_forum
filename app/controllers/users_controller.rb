@@ -115,6 +115,7 @@ class UsersController < ApplicationController
   def create
     if can?(:create, User)
       @user = User.new(params[:user])
+      password_unencrypted = params[:user][:password]
       role = Role.new
       role.name = "normal"
       role.save
@@ -123,7 +124,7 @@ class UsersController < ApplicationController
 
     if can?(:create, User) and @user.save
       respond_to do |format|
-        ForumMailer.welcome_email(@user).deliver
+        ForumMailer.welcome_email(@user, password_unencrypted).deliver
         format.json { render :json => @user.to_json, :status => 200, :text => "User was created!" }
         format.xml  { head :ok }
         format.html { redirect_to :action => :index }
