@@ -1,0 +1,18 @@
+<% if type == :all_articles %>
+  <li>
+  <strong>All articles</strong>
+  </li>
+<% elsif type == :new_article %>
+  <li>
+  <%= link_to "All articles", articles_path %> / <strong>New article</strong>
+  </li>
+<% elsif type == :show_article %>
+  <li>
+  <%= link_to "All articles", articles_path %> / <strong><%= truncate((!article.title_en.empty? ? article.title_en : article.name_no), :length=>50) %></strong>
+  </li>
+<% elsif type == :edit_article %>
+  <li>
+  <%= link_to "All articles", articles_path %> / <strong><%= truncate("Edit " + (!article.title_en.empty? ? article.title_en : article.name_no), :length=>50) %></strong>
+  </li>
+<% end %>
+

@@ -1,0 +1,37 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title_en: MyString
+  title_no: MyString
+  ingress_en: MyText
+  ingress_no: MyText
+  body_en: MyText
+  body_no: MyText
+  press_release: false
+  deleted: false
+  visible: false
+  image_text: MyString
+  main_article: false
+  weight: 1
+  got_comments: false
+  youtube_link: MyString
+  byline_func_id: 1
+  byline: MyString
+
+two:
+  title_en: MyString
+  title_no: MyString
+  ingress_en: MyText
+  ingress_no: MyText
+  body_en: MyText
+  body_no: MyText
+  press_release: false
+  deleted: false
+  visible: false
+  image_text: MyString
+  main_article: false
+  weight: 1
+  got_comments: false
+  youtube_link: MyString
+  byline_func_id: 1
+  byline: MyString

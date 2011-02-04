@@ -9,6 +9,8 @@ class Ability
       can :manage, :all
     elsif user.role? :normal
       can :read, :all
+      can :create, Article
+      can :update, Article, :user_id => user.id
       can :create, ForumThread
       can :create, ForumPost
       can :update, ForumPost, :user_id => user.id

@@ -1,5 +1,7 @@
 SppForum::Application.routes.draw do
 
+  resources :articles
+
   # replace devise_for :users with:
   #devise_for :users,  :controllers => { :registrations => "users/registrations"}
   #namespace :user do
@@ -19,6 +21,6 @@ SppForum::Application.routes.draw do
   resources :forum_threads do
     resources :forum_posts
   end
-  root :to => "forums#index"
+  root :to => "articles#index"
 
 end

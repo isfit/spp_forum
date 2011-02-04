@@ -1,0 +1,19 @@
+/*
+
+Styles for spp_forum
+ 
+ */
+
+
+#articles_table {
+  width:100%;
+}
+
+td.articles_td {
+  width:33%;
+  text-align:left;
+  vertical-align:top;
+  padding:.2em;
+}
+
+
