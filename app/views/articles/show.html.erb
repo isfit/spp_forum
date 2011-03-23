@@ -8,7 +8,10 @@
 <% end %>
 
 <% if !(@article.ingress_en.empty? and @article.ingress_no.empty?) %>
-  <p>
+	<p>
+	<% if @article.picture.exists? %>
+		<%= link_to (image_tag (@article.picture.url(:medium), :align => "right")), "../images/" + @article.picture.url %>
+	<% end %>
   <strong><%= (!@article.ingress_en.empty? ? @article.ingress_en : @article.ingress_no) %></strong>
   </p>
 <% end %>

@@ -3,10 +3,11 @@
 
 <h2>Register User</h2>
 
+
 <%= form_for(@user, :html => { :multipart => :true }) do |f| %>
   <%#= error_messages(@user,"Could not register user") %>
 
-  <%= render :partial => 'user_fields', :locals => { :f => f } %>
+	<%= render :partial => 'user_fields', :locals => { :f => f, :roles => @roles, :roles_new => @roles_new} %>
 
   <p><%= f.label :password %></p>
   <p><%= f.password_field :password %></p>

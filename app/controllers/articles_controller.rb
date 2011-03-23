@@ -2,7 +2,11 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.xml
   def index
-    @articles = Article.all
+		if can?(:read, Article)
+	    @articles = Article.all
+		else
+			@articles = nil
+		end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +17,12 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.xml
   def show
-    @article = Article.find(params[:id])
+		article = Article.find(params[:id])
+		if can?(:read, article)
+			@article = article
+		else
+			@article = nil
+		end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -43,7 +52,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(params[:article])
 
     respond_to do |format|
-      if @article.save
+      if can?(:create, Article) and @article.save
         format.html { redirect_to(@article, :notice => 'Article was successfully created.') }
         format.xml  { render :xml => @article, :status => :created, :location => @article }
       else
@@ -59,7 +68,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
 
     respond_to do |format|
-      if @article.update_attributes(params[:article])
+      if can?(:update, @article) and @article.update_attributes(params[:article])
         format.html { redirect_to(@article, :notice => 'Article was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -72,8 +81,10 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1
   # DELETE /articles/1.xml
   def destroy
-    @article = Article.find(params[:id])
-    @article.destroy
+		@article = Article.find(params[:id])
+		if can?(:destroy, @article)
+  	  @article.destroy
+		end
 
     respond_to do |format|
       format.html { redirect_to(articles_url) }

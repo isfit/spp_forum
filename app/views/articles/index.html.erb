@@ -15,9 +15,12 @@
         <% publish = false
         publish = true if article.visible and !(article.title_en.empty? and article.title_no.empty?) and !(article.body_en.empty? and article.body_no.empty?) %>
         <% if publish %>
+					<% if article.picture.exists? %>
+						<%= link_to (image_tag (article.picture.url(:thumb), :align => "right")), "../images/" + article.picture.url %>
+					<% end %>
           <strong><%= link_to (truncate (!article.title_en.empty? ? article.title_en : article.title_no), :length => 30), article_path(article) %></strong><br />
           <%= truncate (!article.body_en.empty? ? article.body_en : article.body_no), :length => 250 %><br />
-          <%= link_to "Read more...", article_path(article) %>
+					<i><%= link_to "Read more...", article_path(article) %></i>
         <% end %>
     </td>
     <%= raw "</tr>" if i%3 == 2 %>

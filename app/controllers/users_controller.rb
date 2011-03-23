@@ -25,6 +25,11 @@ class UsersController < ApplicationController
   # GET /users/new.json                                    HTML AND AJAX
   #-------------------------------------------------------------------
   def new
+		@roles_new = Role.all
+		if can?(:update, Role)
+			@roles_new = Role.all
+		end
+
     @user = User.new if can?(:create, User)
     respond_to do |format|
       format.json { render :json => @user }   
@@ -116,9 +121,12 @@ class UsersController < ApplicationController
     if can?(:create, User)
       @user = User.new(params[:user])
       password_unencrypted = params[:user][:password]
-      role = Role.new
-      role.name = "normal"
-      role.save
+      role = Role.where(:name => "normal")
+      if role == nil or role.empty?
+        role = Role.new
+        role.name = "normal"
+        role.save
+      end
       @user.roles.push(role)
     end
 

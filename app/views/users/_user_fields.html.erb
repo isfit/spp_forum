@@ -1,3 +1,6 @@
+
+<%= debug roles_new %>
+
 <p>Profile picture</p>
 <p><%= image_tag @user.picture.url(:medium) %></p>
 <p><%= f.file_field :picture %></p>
@@ -16,5 +19,11 @@
 
 <% if can? :read, Role %>
   <p><%= f.label :roles %></p>
-  <p><%= @roles %></p>
+  <p><%= roles %></p>
 <% end %>
+
+<% if can? :update, Role %>
+  <p>Select role for user</p>
+  <p><%= select_tag "roles_new", options_from_collection_for_select(roles_new, "id", "name") %></p>
+<% end %>
+

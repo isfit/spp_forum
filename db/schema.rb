@@ -29,6 +29,11 @@ ActiveRecord::Schema.define(:version => 20110203172331) do
     t.string   "youtube_link"
     t.integer  "byline_func_id"
     t.string   "byline"
+    t.integer  "user_id"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
