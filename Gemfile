@@ -17,7 +17,8 @@ gem 'cancan'
 # Deploy with Capistrano
 gem 'capistrano'
 group :development, :test do
-  gem "nifty-generators"
+  gem 'nifty-generators'
+  gem 'rspec-rails'
 end
 
 
